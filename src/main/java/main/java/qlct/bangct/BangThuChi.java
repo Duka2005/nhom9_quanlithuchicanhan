@@ -16,4 +16,5 @@ public class BangThuChi {
         this.type = type;
         this.value = value;
     }
+    
 }
