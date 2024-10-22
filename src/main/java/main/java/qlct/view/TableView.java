@@ -6,6 +6,7 @@ package main.java.qlct.view;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -47,6 +48,19 @@ public class TableView extends javax.swing.JFrame {
     }
     
     public void addRowToJTable(){
+        try{
+            File f = new File("data.json");
+ 
+            if (f.exists()) {
+            } else {
+                FileWriter file = new FileWriter("data.json");
+                file.write("[]");
+                file.close();
+            }
+        } catch (IOException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+        }
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         List<BangThuChi> list = loaddata();
         Object rowData[] = new Object[6];
