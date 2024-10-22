@@ -114,7 +114,7 @@ public class TableView extends javax.swing.JFrame {
         displaythuchi.setMinimumSize(new java.awt.Dimension(175, 30));
         displaythuchi.setPreferredSize(new java.awt.Dimension(175, 30));
 
-        jLabel5.setText("Loại (Thu/Chi)");
+        jLabel5.setText("Loại (thu/chi)");
 
         displaytype.setMaximumSize(new java.awt.Dimension(64, 30));
         displaytype.setMinimumSize(new java.awt.Dimension(64, 30));
@@ -287,12 +287,16 @@ public class TableView extends javax.swing.JFrame {
     private void addbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbuttonActionPerformed
         try{
             if (Integer.parseInt(displaymonth.getText()) != NaN && Integer.parseInt(displayday.getText()) != NaN && Integer.parseInt(displayyear.getText()) != NaN && Integer.parseInt(displaymoney.getText()) != NaN){
-                DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-                model.addRow(new Object[]{displaymonth.getText(),displayday.getText(),displayyear.getText(),displaythuchi.getText(),displaytype.getText(),displaymoney.getText()});
-                tablethuchi.add(new BangThuChi(Integer.parseInt(displaymonth.getText()),Integer.parseInt(displayday.getText()),Integer.parseInt(displayyear.getText()),displaythuchi.getText(),displaytype.getText(),Integer.parseInt(displaymoney.getText())));
-                FileWriter writer = new FileWriter("data.json");
-                writer.write(gson.toJson(tablethuchi));
-                writer.close();
+                if (displaytype.getText().trim().equals("thu") || displaytype.getText().trim().equals("chi")){    
+                    DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+                    model.addRow(new Object[]{displaymonth.getText(),displayday.getText(),displayyear.getText(),displaythuchi.getText(),displaytype.getText(),displaymoney.getText()});
+                    tablethuchi.add(new BangThuChi(Integer.parseInt(displaymonth.getText()),Integer.parseInt(displayday.getText()),Integer.parseInt(displayyear.getText()),displaythuchi.getText(),displaytype.getText(),Integer.parseInt(displaymoney.getText())));
+                    FileWriter writer = new FileWriter("data.json");
+                    writer.write(gson.toJson(tablethuchi));
+                    writer.close();
+                } else {
+                    JOptionPane.showMessageDialog(null,"Phần Loại chỉ được nhập 'thu' hoặc 'chi'");
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -320,16 +324,20 @@ public class TableView extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
             if (i >= 0){
                 if (Integer.parseInt(displaymonth.getText()) != NaN && Integer.parseInt(displayday.getText()) != NaN && Integer.parseInt(displayyear.getText()) != NaN && Integer.parseInt(displaymoney.getText()) != NaN){
-                    model.setValueAt(displaymonth.getText(),i,0);
-                    model.setValueAt(displayday.getText(),i,1);
-                    model.setValueAt(displayyear.getText(),i,2);
-                    model.setValueAt(displaythuchi.getText(),i,3);
-                    model.setValueAt(displaytype.getText(),i,4);
-                    model.setValueAt(displaymoney.getText(),i,5);
-                    tablethuchi.set(i,new BangThuChi(Integer.parseInt(displaymonth.getText()),Integer.parseInt(displayday.getText()),Integer.parseInt(displayyear.getText()),displaythuchi.getText(),displaytype.getText(),Integer.parseInt(displaymoney.getText())));
-                    FileWriter writer = new FileWriter("data.json");
-                    writer.write(gson.toJson(tablethuchi));
-                    writer.close();
+                    if (displaytype.getText().trim().equals("thu") || displaytype.getText().trim().equals("chi")){  
+                        model.setValueAt(displaymonth.getText(),i,0);
+                        model.setValueAt(displayday.getText(),i,1);
+                        model.setValueAt(displayyear.getText(),i,2);
+                        model.setValueAt(displaythuchi.getText(),i,3);
+                        model.setValueAt(displaytype.getText(),i,4);
+                        model.setValueAt(displaymoney.getText(),i,5);
+                        tablethuchi.set(i,new BangThuChi(Integer.parseInt(displaymonth.getText()),Integer.parseInt(displayday.getText()),Integer.parseInt(displayyear.getText()),displaythuchi.getText(),displaytype.getText(),Integer.parseInt(displaymoney.getText())));
+                        FileWriter writer = new FileWriter("data.json");
+                        writer.write(gson.toJson(tablethuchi));
+                        writer.close();
+                    } else {
+                    JOptionPane.showMessageDialog(null,"Phần Loại chỉ được nhập 'thu' hoặc 'chi'");
+                    }
                 }
             } else {
                 JOptionPane.showMessageDialog(null,"Bạn chưa chọn hàng để sửa");
@@ -352,7 +360,7 @@ public class TableView extends javax.swing.JFrame {
             displayyear.setText("");
             displaythuchi.setText("");
             displaytype.setText("");
-        displaymoney.setText("");
+            displaymoney.setText("");
         } catch (Exception ex){
             JOptionPane.showMessageDialog(null,"Bạn chưa chọn hàng để xóa");
         }

@@ -206,7 +206,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Lo&#x1ea1;i (Thu/Chi)"/>
+        <Property name="text" type="java.lang.String" value="Lo&#x1ea1;i (thu/chi)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="displaytype">
