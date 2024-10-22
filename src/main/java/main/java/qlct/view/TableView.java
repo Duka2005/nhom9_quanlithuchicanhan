@@ -59,6 +59,8 @@ public class TableView extends javax.swing.JFrame {
             rowData[5] = list.get(i).value;
             model.addRow(rowData);
         }
+        updatebutton.setEnabled(false);
+        removebutton.setEnabled(false);
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -279,7 +281,8 @@ public class TableView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
- 
+
+    
     private void displaymonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displaymonthActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_displaymonthActionPerformed
@@ -305,6 +308,7 @@ public class TableView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_addbuttonActionPerformed
 
+    
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         updatebutton.setEnabled(true);
         removebutton.setEnabled(true);
