@@ -51,13 +51,14 @@ public class TableView extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     public List<BangThuChi> tablethuchi = new ArrayList();
+    public String week;
     public String month;
     public String day;
     public String year;
     public String thongtin;
     public String loai;
     public String money;
-    public int sumthu;
+    public int sumthu = 0;
     public void addRowToJTable(){
         try{    
             DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
@@ -74,7 +75,8 @@ public class TableView extends javax.swing.JFrame {
 
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
-
+                    
+                    week = element.getElementsByTagName("week").item(0).getTextContent();
                     month = element.getElementsByTagName("month").item(0).getTextContent();
                     day = element.getElementsByTagName("day").item(0).getTextContent();
                     year = element.getElementsByTagName("year").item(0).getTextContent();
@@ -82,13 +84,13 @@ public class TableView extends javax.swing.JFrame {
                     loai = element.getElementsByTagName("loai").item(0).getTextContent();
                     money = element.getElementsByTagName("money").item(0).getTextContent();
                 }
-                tablethuchi.add(new BangThuChi(Integer.parseInt(month),Integer.parseInt(day),Integer.parseInt(year),thongtin,loai,Integer.parseInt(money)));
+                tablethuchi.add(new BangThuChi(Integer.parseInt(week),Integer.parseInt(month),Integer.parseInt(day),Integer.parseInt(year),thongtin,loai,Integer.parseInt(money)));
                 if (loai.equals("thu")){
                     sumthu += Integer.parseInt(money);
                 } else {
                     sumthu -= Integer.parseInt(money);
                 }
-                model.addRow(new Object[]{month, day, year, thongtin,loai,money});
+                model.addRow(new Object[]{week,month,day,year,thongtin,loai,money});
                 totalthudisplaymaster.setText(Integer.toString(sumthu));
             }
             updatebutton.setEnabled(false);
@@ -127,6 +129,9 @@ public class TableView extends javax.swing.JFrame {
         listmonth = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         searchdata = new javax.swing.JTextField();
+        displayweek = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        listweek = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1084, 800));
@@ -177,7 +182,7 @@ public class TableView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tháng", "Ngày", "Năm", "Nội dung thu chi", "Loại", "Số tiền"
+                "Tuần", "Tháng", "Ngày", "Năm", "Nội dung thu chi", "Loại", "Số tiền"
             }
         ));
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
@@ -185,13 +190,13 @@ public class TableView extends javax.swing.JFrame {
         jTable1.setMinimumSize(new java.awt.Dimension(732, 450));
         jTable1.setPreferredSize(new java.awt.Dimension(732, 450));
         jTable1.setShowGrid(false);
-
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(30);
         jTable1.getColumnModel().getColumn(1).setPreferredWidth(50);
         jTable1.getColumnModel().getColumn(2).setPreferredWidth(50);
-        jTable1.getColumnModel().getColumn(3).setPreferredWidth(200);
-        jTable1.getColumnModel().getColumn(4).setPreferredWidth(90);
-        jTable1.getColumnModel().getColumn(5).setPreferredWidth(120);
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTable1.getColumnModel().getColumn(4).setPreferredWidth(200);
+        jTable1.getColumnModel().getColumn(5).setPreferredWidth(90);
+        jTable1.getColumnModel().getColumn(6).setPreferredWidth(120);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -290,6 +295,19 @@ public class TableView extends javax.swing.JFrame {
             }
         });
 
+        displayweek.setMaximumSize(new java.awt.Dimension(64, 30));
+        displayweek.setMinimumSize(new java.awt.Dimension(64, 30));
+        displayweek.setPreferredSize(new java.awt.Dimension(64, 30));
+
+        jLabel10.setText("Tuần");
+
+        listweek.setText("Tuần");
+        listweek.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listweekActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -297,105 +315,113 @@ public class TableView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(displayweek, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(displayday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(displaythuchi, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(displaymonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(displayyear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(displaythuchi, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(displaytype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(displaymoney, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(displaymonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(displayday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(addbutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(updatebutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(removebutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(clearbutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(savebutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel9)
                     .addComponent(jLabel8)
+                    .addComponent(searchdata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(listday, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(listmonth, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel9)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(searchdata, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(addbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(clearbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(9, 9, 9)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(updatebutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(savebutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(removebutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(listmonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(listweek, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(72, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(totalthudisplaymaster, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(61, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(totalthudisplaymaster, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(totalthudisplaymaster, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(displayweek, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(displaymonth, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(displaymonth, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(displayday, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(displayyear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(displayyear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(displaythuchi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(displaythuchi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(displaytype, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(displaytype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(displaymoney, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(removebutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(updatebutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(updatebutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(removebutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(clearbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(clearbutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(savebutton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9)
@@ -404,10 +430,11 @@ public class TableView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(listday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(listmonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(listday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(498, 498, 498))))
+                            .addComponent(listweek, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -431,15 +458,15 @@ public class TableView extends javax.swing.JFrame {
                         }
                         sumthu -= Integer.parseInt(displaymoney.getText());
                     }    
-                    model.addRow(new Object[]{displaymonth.getText(),displayday.getText(),displayyear.getText(),displaythuchi.getText(),displaytype.getText(),displaymoney.getText()});
-                    tablethuchi.add(new BangThuChi(Integer.parseInt(displaymonth.getText()),Integer.parseInt(displayday.getText()),Integer.parseInt(displayyear.getText()),displaythuchi.getText(),displaytype.getText(),Integer.parseInt(displaymoney.getText())));
+                    model.addRow(new Object[]{displayweek.getText(),displaymonth.getText(),displayday.getText(),displayyear.getText(),displaythuchi.getText(),displaytype.getText(),displaymoney.getText()});
+                    tablethuchi.add(new BangThuChi(Integer.parseInt(displayweek.getText()),Integer.parseInt(displaymonth.getText()),Integer.parseInt(displayday.getText()),Integer.parseInt(displayyear.getText()),displaythuchi.getText(),displaytype.getText(),Integer.parseInt(displaymoney.getText())));
                     totalthudisplaymaster.setText(Integer.toString(sumthu));
                 } else {
                     JOptionPane.showMessageDialog(null,"Phần Loại chỉ được nhập 'thu' hoặc 'chi'");
                 }
             }
         } catch (NumberFormatException e){
-            JOptionPane.showMessageDialog(null,"Phần Tháng/Ngày/Năm hoặc Tiền không phải là số");
+            JOptionPane.showMessageDialog(null,"Phần Tuần/Tháng/Ngày/Năm hoặc Tiền không phải là số");
         }
     }//GEN-LAST:event_addbuttonActionPerformed
 
@@ -449,12 +476,13 @@ public class TableView extends javax.swing.JFrame {
         removebutton.setEnabled(true);
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         int selectedRowIndex = jTable1.getSelectedRow();
-        displaymonth.setText(model.getValueAt(selectedRowIndex, 0).toString());
-        displayday.setText(model.getValueAt(selectedRowIndex, 1).toString());
-        displayyear.setText(model.getValueAt(selectedRowIndex, 2).toString());
-        displaythuchi.setText(model.getValueAt(selectedRowIndex, 3).toString());
-        displaytype.setText(model.getValueAt(selectedRowIndex, 4).toString());
-        displaymoney.setText(model.getValueAt(selectedRowIndex, 5).toString());
+        displayweek.setText(model.getValueAt(selectedRowIndex, 0).toString());
+        displaymonth.setText(model.getValueAt(selectedRowIndex, 1).toString());
+        displayday.setText(model.getValueAt(selectedRowIndex, 2).toString());
+        displayyear.setText(model.getValueAt(selectedRowIndex, 3).toString());
+        displaythuchi.setText(model.getValueAt(selectedRowIndex, 4).toString());
+        displaytype.setText(model.getValueAt(selectedRowIndex, 5).toString());
+        displaymoney.setText(model.getValueAt(selectedRowIndex, 6).toString());
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void updatebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebuttonActionPerformed
@@ -464,26 +492,27 @@ public class TableView extends javax.swing.JFrame {
             if (i >= 0){
                 if (Integer.parseInt(displaymonth.getText()) != NaN && Integer.parseInt(displayday.getText()) != NaN && Integer.parseInt(displayyear.getText()) != NaN && Integer.parseInt(displaymoney.getText()) != NaN){
                     if (displaytype.getText().trim().equals("thu") || displaytype.getText().trim().equals("chi")){
-                        if (jTable1.getValueAt(i,4).toString().trim().equals("thu")){
-                            if (sumthu - Integer.parseInt(model.getValueAt(i,5).toString()) + Integer.parseInt(displaymoney.getText()) < 0){
+                        if (jTable1.getValueAt(i,5).toString().trim().equals("thu")){
+                            if (sumthu - Integer.parseInt(model.getValueAt(i,6).toString()) + Integer.parseInt(displaymoney.getText()) < 0){
                                 JOptionPane.showMessageDialog(null,"Số tiền phần 'chi' đang quá so với thu");
                             }
-                            sumthu -= Integer.parseInt(model.getValueAt(i,5).toString());
+                            sumthu -= Integer.parseInt(model.getValueAt(i,6).toString());
                         } else {
-                            sumthu += Integer.parseInt(model.getValueAt(i,5).toString());
+                            sumthu += Integer.parseInt(model.getValueAt(i,6).toString());
                         }
-                        model.setValueAt(displaymonth.getText(),i,0);
-                        model.setValueAt(displayday.getText(),i,1);
-                        model.setValueAt(displayyear.getText(),i,2);
-                        model.setValueAt(displaythuchi.getText(),i,3);
-                        model.setValueAt(displaytype.getText(),i,4);
-                        model.setValueAt(displaymoney.getText(),i,5);
-                        if (jTable1.getValueAt(i,4).toString().trim().equals("thu")){
-                            sumthu += Integer.parseInt(model.getValueAt(i,5).toString());
+                        model.setValueAt(displayweek.getText(),i,0);
+                        model.setValueAt(displaymonth.getText(),i,1);
+                        model.setValueAt(displayday.getText(),i,2);
+                        model.setValueAt(displayyear.getText(),i,3);
+                        model.setValueAt(displaythuchi.getText(),i,4);
+                        model.setValueAt(displaytype.getText(),i,5);
+                        model.setValueAt(displaymoney.getText(),i,6);
+                        if (jTable1.getValueAt(i,5).toString().trim().equals("thu")){
+                            sumthu += Integer.parseInt(model.getValueAt(i,6).toString());
                         } else {
-                            sumthu -= Integer.parseInt(model.getValueAt(i,5).toString());
+                            sumthu -= Integer.parseInt(model.getValueAt(i,6).toString());
                         }
-                        tablethuchi.set(i,new BangThuChi(Integer.parseInt(displaymonth.getText()),Integer.parseInt(displayday.getText()),Integer.parseInt(displayyear.getText()),displaythuchi.getText(),displaytype.getText(),Integer.parseInt(displaymoney.getText())));
+                        tablethuchi.set(i,new BangThuChi(Integer.parseInt(displayweek.getText()),Integer.parseInt(displaymonth.getText()),Integer.parseInt(displayday.getText()),Integer.parseInt(displayyear.getText()),displaythuchi.getText(),displaytype.getText(),Integer.parseInt(displaymoney.getText())));
                         
                         totalthudisplaymaster.setText(Integer.toString(sumthu));
                     } else {
@@ -494,7 +523,7 @@ public class TableView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Bạn chưa chọn hàng để sửa");
             }
         } catch (NumberFormatException e){
-            JOptionPane.showMessageDialog(null,"Phần Tháng/Ngày/Năm hoặc Tiền không phải là số");
+            JOptionPane.showMessageDialog(null,"Phần Tuần/Tháng/Ngày/Năm hoặc Tiền không phải là số");
         }
     }//GEN-LAST:event_updatebuttonActionPerformed
 
@@ -502,17 +531,18 @@ public class TableView extends javax.swing.JFrame {
         try{
             DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
             int SelectedRowIndex = jTable1.getSelectedRow();
-            if (jTable1.getValueAt(SelectedRowIndex,4).toString().trim().equals("thu")){
-                if (sumthu - Integer.parseInt(model.getValueAt(SelectedRowIndex,5).toString()) < 0){
+            if (jTable1.getValueAt(SelectedRowIndex,5).toString().trim().equals("thu")){
+                if (sumthu - Integer.parseInt(model.getValueAt(SelectedRowIndex,6).toString()) < 0){
                     JOptionPane.showMessageDialog(null,"Số tiền phần 'chi' đang quá so với thu");
                 }
-                sumthu -= Integer.parseInt(model.getValueAt(SelectedRowIndex,5).toString());
+                sumthu -= Integer.parseInt(model.getValueAt(SelectedRowIndex,6).toString());
             } else {
-                sumthu += Integer.parseInt(model.getValueAt(SelectedRowIndex,5).toString());
+                sumthu += Integer.parseInt(model.getValueAt(SelectedRowIndex,6).toString());
             }
             totalthudisplaymaster.setText(Integer.toString(sumthu));
             model.removeRow(SelectedRowIndex);
             tablethuchi.remove(SelectedRowIndex);
+            displayweek.setText("");
             displaymonth.setText("");
             displayday.setText("");
             displayyear.setText("");
@@ -526,6 +556,7 @@ public class TableView extends javax.swing.JFrame {
     }//GEN-LAST:event_removebuttonActionPerformed
 
     private void clearbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearbuttonActionPerformed
+        displayweek.setText("");
         displaymonth.setText("");
         displayday.setText("");
         displayyear.setText("");
@@ -567,6 +598,14 @@ public class TableView extends javax.swing.JFrame {
         obj.setRowFilter(RowFilter.regexFilter(searchdata.getText()));
     }//GEN-LAST:event_searchdataKeyReleased
 
+    private void listweekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listweekActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new BangTheoTuan().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_listweekActionPerformed
+
     protected DocumentBuilder domFactory = null;
     protected DocumentBuilder domBuilder = null;
     
@@ -585,29 +624,33 @@ public class TableView extends javax.swing.JFrame {
             while(i < table.getRowCount()){
                 Element row = doc.createElement("Data");
                 rootElement.appendChild(row);
-
+                
+                Element elementweek = doc.createElement("week");
+                elementweek.appendChild(doc.createTextNode(table.getModel().getValueAt(i,0)+""));
+                row.appendChild(elementweek);
+                
                 Element elementmonth = doc.createElement("month");
-                elementmonth.appendChild(doc.createTextNode(table.getModel().getValueAt(i,0)+""));
+                elementmonth.appendChild(doc.createTextNode(table.getModel().getValueAt(i,1)+""));
                 row.appendChild(elementmonth);
                 
                 Element elementday = doc.createElement("day");
-                elementday.appendChild(doc.createTextNode(table.getModel().getValueAt(i,1)+""));
+                elementday.appendChild(doc.createTextNode(table.getModel().getValueAt(i,2)+""));
                 row.appendChild(elementday);
                 
                 Element elementyear = doc.createElement("year");
-                elementyear.appendChild(doc.createTextNode(table.getModel().getValueAt(i,2)+""));
+                elementyear.appendChild(doc.createTextNode(table.getModel().getValueAt(i,3)+""));
                 row.appendChild(elementyear);
                 
                 Element elementthongtin = doc.createElement("thongtin");
-                elementthongtin.appendChild(doc.createTextNode(table.getModel().getValueAt(i,3)+""));
+                elementthongtin.appendChild(doc.createTextNode(table.getModel().getValueAt(i,4)+""));
                 row.appendChild(elementthongtin);
                 
                 Element elementtype = doc.createElement("loai");
-                elementtype.appendChild(doc.createTextNode(table.getModel().getValueAt(i,4)+""));
+                elementtype.appendChild(doc.createTextNode(table.getModel().getValueAt(i,5)+""));
                 row.appendChild(elementtype);
                 
                 Element elementmoney = doc.createElement("money");
-                elementmoney.appendChild(doc.createTextNode(table.getModel().getValueAt(i,5)+""));
+                elementmoney.appendChild(doc.createTextNode(table.getModel().getValueAt(i,6)+""));
                 row.appendChild(elementmoney);
                 
                 i++;
@@ -654,8 +697,10 @@ public class TableView extends javax.swing.JFrame {
     private javax.swing.JTextField displaymonth;
     private javax.swing.JTextField displaythuchi;
     private javax.swing.JTextField displaytype;
+    private javax.swing.JTextField displayweek;
     private javax.swing.JTextField displayyear;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -668,6 +713,7 @@ public class TableView extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JButton listday;
     private javax.swing.JButton listmonth;
+    private javax.swing.JButton listweek;
     private javax.swing.JButton removebutton;
     private javax.swing.JButton savebutton;
     private javax.swing.JTextField searchdata;

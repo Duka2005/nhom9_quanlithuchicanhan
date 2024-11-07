@@ -1,59 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Datas>
     <Data>
-        <month>1</month>
-        <day>1</day>
-        <year>1</year>
-        <thongtin>1</thongtin>
+        <week>1</week>
+        <month>3</month>
+        <day>14</day>
+        <year>2024</year>
+        <thongtin>fdgdfhhkhjkhj</thongtin>
         <loai>thu</loai>
-        <money>110000</money>
+        <money>23000000</money>
     </Data>
     <Data>
-        <month>2</month>
-        <day>2</day>
-        <year>2</year>
-        <thongtin>2</thongtin>
+        <week>2</week>
+        <month>4</month>
+        <day>15</day>
+        <year>2024</year>
+        <thongtin>fdhgkjfdghdfjgd</thongtin>
+        <loai>chi</loai>
+        <money>300000</money>
+    </Data>
+    <Data>
+        <week>2</week>
+        <month>4</month>
+        <day>15</day>
+        <year>2024</year>
+        <thongtin>fdhgjdfkhgdfjgd</thongtin>
+        <loai>chi</loai>
+        <money>120000</money>
+    </Data>
+    <Data>
+        <week>2</week>
+        <month>4</month>
+        <day>17</day>
+        <year>2024</year>
+        <thongtin>ghfjkgdgfd</thongtin>
+        <loai>chi</loai>
+        <money>50000</money>
+    </Data>
+    <Data>
+        <week>3</week>
+        <month>4</month>
+        <day>22</day>
+        <year>2024</year>
+        <thongtin>gfdhgkjdfgdfg</thongtin>
         <loai>thu</loai>
-        <money>220000</money>
+        <money>2350000</money>
     </Data>
     <Data>
-        <month>1</month>
-        <day>1</day>
-        <year>1</year>
-        <thongtin>1</thongtin>
+        <week>3</week>
+        <month>4</month>
+        <day>23</day>
+        <year>2024</year>
+        <thongtin>gfdhgjdf</thongtin>
         <loai>thu</loai>
-        <money>110000</money>
-    </Data>
-    <Data>
-        <month>1</month>
-        <day>23</day>
-        <year>2024</year>
-        <thongtin>jfdklgjdflgzs</thongtin>
-        <loai>chi</loai>
-        <money>10000</money>
-    </Data>
-    <Data>
-        <month>1</month>
-        <day>23</day>
-        <year>2024</year>
-        <thongtin>jfdklgjdflgzs</thongtin>
-        <loai>chi</loai>
-        <money>110000</money>
-    </Data>
-    <Data>
-        <month>1</month>
-        <day>23</day>
-        <year>2024</year>
-        <thongtin>jfdklgjdflgzs</thongtin>
-        <loai>chi</loai>
-        <money>110000</money>
-    </Data>
-    <Data>
-        <month>1</month>
-        <day>23</day>
-        <year>2024</year>
-        <thongtin>jfdklgjdflgzs</thongtin>
-        <loai>chi</loai>
-        <money>1110000</money>
+        <money>50000</money>
     </Data>
 </Datas>

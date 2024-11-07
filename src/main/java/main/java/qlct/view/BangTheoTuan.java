@@ -12,12 +12,12 @@ import main.java.qlct.bangct.BangThuChi;
  *
  * @author dovie_000
  */
-public class BangTheoNgay extends javax.swing.JFrame {
+public class BangTheoTuan extends javax.swing.JFrame {
 
     /**
      * Creates new form BangTheoTuan
      */
-    public BangTheoNgay() {
+    public BangTheoTuan() {
         initComponents();
     }
 
@@ -28,7 +28,7 @@ public class BangTheoNgay extends javax.swing.JFrame {
      */
     
     public int rowsize = 0;
-    public int sumthungay = 0;
+    public int sumthutuan = 0;
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -36,9 +36,7 @@ public class BangTheoNgay extends javax.swing.JFrame {
         closebutton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        daydisplay = new javax.swing.JTextField();
-        yeardisplay = new javax.swing.JTextField();
+        weekdisplay = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         totalthudisplaymaster = new javax.swing.JTextField();
@@ -47,7 +45,6 @@ public class BangTheoNgay extends javax.swing.JFrame {
         showbutton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(845, 750));
 
         closebutton.setText("Tắt");
         closebutton.setMaximumSize(new java.awt.Dimension(75, 40));
@@ -59,19 +56,13 @@ public class BangTheoNgay extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Nhập Ngày và Năm muốn thống kê:");
+        jLabel1.setText("Nhập Tuần muốn thống kê:");
 
-        jLabel2.setText("Ngày:");
+        jLabel2.setText("Tuần:");
 
-        jLabel3.setText("Năm:");
-
-        daydisplay.setMaximumSize(new java.awt.Dimension(72, 40));
-        daydisplay.setMinimumSize(new java.awt.Dimension(72, 40));
-        daydisplay.setPreferredSize(new java.awt.Dimension(72, 40));
-
-        yeardisplay.setMaximumSize(new java.awt.Dimension(72, 40));
-        yeardisplay.setMinimumSize(new java.awt.Dimension(72, 40));
-        yeardisplay.setPreferredSize(new java.awt.Dimension(72, 40));
+        weekdisplay.setMaximumSize(new java.awt.Dimension(72, 40));
+        weekdisplay.setMinimumSize(new java.awt.Dimension(72, 40));
+        weekdisplay.setPreferredSize(new java.awt.Dimension(72, 40));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,12 +112,8 @@ public class BangTheoNgay extends javax.swing.JFrame {
                         .addGap(249, 249, 249)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(daydisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(weekdisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(yeardisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(showbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 91, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -144,9 +131,7 @@ public class BangTheoNgay extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(daydisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(yeardisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(weekdisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(showbutton, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,14 +158,14 @@ public class BangTheoNgay extends javax.swing.JFrame {
         Object rowData[] = new Object[7];
         for (int i = 0;i < rowsize;i++){
             if (jTable1.getValueAt(0,5).toString().trim().equals("thu")){
-                sumthungay -= Integer.parseInt(model.getValueAt(0,6).toString());
+                sumthutuan -= Integer.parseInt(model.getValueAt(0,6).toString());
             } else {
-                sumthungay += Integer.parseInt(model.getValueAt(0,6).toString());
+                sumthutuan += Integer.parseInt(model.getValueAt(0,6).toString());
             }
             model.removeRow(0);
         }
         for(int i = 0;i < list.size();i++){
-            if(Integer.parseInt(daydisplay.getText()) == list.get(i).ngay && Integer.parseInt(yeardisplay.getText()) == list.get(i).nam){
+            if(Integer.parseInt(weekdisplay.getText()) == list.get(i).tuan){
                 rowData[0] = list.get(i).tuan;
                 rowData[1] = list.get(i).thang;
                 rowData[2] = list.get(i).ngay;
@@ -189,12 +174,12 @@ public class BangTheoNgay extends javax.swing.JFrame {
                 rowData[5] = list.get(i).type;
                 rowData[6] = list.get(i).value;
                 if (rowData[5].equals("thu")){
-                    sumthungay += list.get(i).value;
+                    sumthutuan += list.get(i).value;
                 } else {
-                    sumthungay -= list.get(i).value;
+                    sumthutuan -= list.get(i).value;
                 }
                 model.addRow(rowData);
-                totalthudisplaymaster.setText(Integer.toString(sumthungay));
+                totalthudisplaymaster.setText(Integer.toString(sumthutuan));
             }
         }
         rowsize = model.getRowCount();
@@ -203,15 +188,13 @@ public class BangTheoNgay extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closebutton;
-    private javax.swing.JTextField daydisplay;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton showbutton;
     private javax.swing.JTextField totalthudisplaymaster;
-    private javax.swing.JTextField yeardisplay;
+    private javax.swing.JTextField weekdisplay;
     // End of variables declaration//GEN-END:variables
 }

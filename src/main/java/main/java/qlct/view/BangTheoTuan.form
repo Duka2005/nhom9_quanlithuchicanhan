@@ -3,9 +3,6 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[845, 750]"/>
-    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -43,12 +40,8 @@
                       <EmptySpace min="-2" pref="249" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="daydisplay" min="-2" max="-2" attributes="0"/>
+                      <Component id="weekdisplay" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="yeardisplay" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="showbutton" min="-2" pref="89" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -71,9 +64,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="daydisplay" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="yeardisplay" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="weekdisplay" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="showbutton" alignment="3" pref="40" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -110,33 +101,15 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nh&#x1ead;p Ng&#xe0;y v&#xe0; N&#x103;m mu&#x1ed1;n th&#x1ed1;ng k&#xea;:"/>
+        <Property name="text" type="java.lang.String" value="Nh&#x1ead;p Tu&#x1ea7;n mu&#x1ed1;n th&#x1ed1;ng k&#xea;:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ng&#xe0;y:"/>
+        <Property name="text" type="java.lang.String" value="Tu&#x1ea7;n:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="N&#x103;m:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="daydisplay">
-      <Properties>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[72, 40]"/>
-        </Property>
-        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[72, 40]"/>
-        </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[72, 40]"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="yeardisplay">
+    <Component class="javax.swing.JTextField" name="weekdisplay">
       <Properties>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[72, 40]"/>
