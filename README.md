@@ -55,7 +55,7 @@ Dự án "Quản Lý Thu Chi Cá Nhân" là một ứng dụng Java sử dụng 
 * Đăng Nhập:
 
 - Khi ứng dụng khởi động, một cửa sổ đăng nhập sẽ xuất hiện. Nhập thông tin tài khoản:
-- Tài khoản admin
+- Tài khoản: admin
 - Mật khẩu: admin
 - Nhấn nút "Đăng nhập". Nếu thông tin đúng, bạn sẽ được chuyển đến giao diện chính.
 
