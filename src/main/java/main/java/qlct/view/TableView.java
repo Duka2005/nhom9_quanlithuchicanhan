@@ -447,7 +447,7 @@ public class TableView extends javax.swing.JFrame {
 
     private void addbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbuttonActionPerformed
         try{
-            if (Integer.parseInt(displaymonth.getText()) != NaN && Integer.parseInt(displayday.getText()) != NaN && Integer.parseInt(displayyear.getText()) != NaN && Integer.parseInt(displaymoney.getText()) != NaN){
+            if (Integer.parseInt(displayweek.getText()) != NaN && Integer.parseInt(displaymonth.getText()) != NaN && Integer.parseInt(displayday.getText()) != NaN && Integer.parseInt(displayyear.getText()) != NaN && Integer.parseInt(displaymoney.getText()) != NaN){
                 if (displaytype.getText().trim().equals("thu") || displaytype.getText().trim().equals("chi")){    
                     DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
                     if (displaytype.getText().trim().equals("thu")){
@@ -490,7 +490,7 @@ public class TableView extends javax.swing.JFrame {
             int i = jTable1.getSelectedRow();
             DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
             if (i >= 0){
-                if (Integer.parseInt(displaymonth.getText()) != NaN && Integer.parseInt(displayday.getText()) != NaN && Integer.parseInt(displayyear.getText()) != NaN && Integer.parseInt(displaymoney.getText()) != NaN){
+                if (Integer.parseInt(displayweek.getText()) != NaN && Integer.parseInt(displaymonth.getText()) != NaN && Integer.parseInt(displayday.getText()) != NaN && Integer.parseInt(displayyear.getText()) != NaN && Integer.parseInt(displaymoney.getText()) != NaN){
                     if (displaytype.getText().trim().equals("thu") || displaytype.getText().trim().equals("chi")){
                         if (jTable1.getValueAt(i,5).toString().trim().equals("thu")){
                             if (sumthu - Integer.parseInt(model.getValueAt(i,6).toString()) + Integer.parseInt(displaymoney.getText()) < 0){
