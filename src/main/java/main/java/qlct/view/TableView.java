@@ -448,21 +448,29 @@ public class TableView extends javax.swing.JFrame {
     private void addbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbuttonActionPerformed
         try{
             if (Integer.parseInt(displayweek.getText()) != NaN && Integer.parseInt(displaymonth.getText()) != NaN && Integer.parseInt(displayday.getText()) != NaN && Integer.parseInt(displayyear.getText()) != NaN && Integer.parseInt(displaymoney.getText()) != NaN){
-                if (displaytype.getText().trim().equals("thu") || displaytype.getText().trim().equals("chi")){    
-                    DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-                    if (displaytype.getText().trim().equals("thu")){
-                        sumthu += Integer.parseInt(displaymoney.getText());
-                    } else {
-                        if (sumthu - Integer.parseInt(displaymoney.getText()) < 0){
-                            JOptionPane.showMessageDialog(null,"Số tiền phần 'chi' đang quá so với thu");
+                if(Integer.parseInt(displayday.getText()) > 0 && Integer.parseInt(displayday.getText()) < 32){ 
+                    if(Integer.parseInt(displaymonth.getText()) > 0 && Integer.parseInt(displaymonth.getText()) < 13){
+                        if (displaytype.getText().trim().equals("thu") || displaytype.getText().trim().equals("chi")){    
+                            DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+                            if (displaytype.getText().trim().equals("thu")){
+                                sumthu += Integer.parseInt(displaymoney.getText());
+                            } else {
+                                if (sumthu - Integer.parseInt(displaymoney.getText()) < 0){
+                                    JOptionPane.showMessageDialog(null,"Số tiền phần 'chi' đang quá so với thu");
+                                }
+                                sumthu -= Integer.parseInt(displaymoney.getText());
+                            }    
+                            model.addRow(new Object[]{displayweek.getText(),displaymonth.getText(),displayday.getText(),displayyear.getText(),displaythuchi.getText(),displaytype.getText(),displaymoney.getText()});
+                            tablethuchi.add(new BangThuChi(Integer.parseInt(displayweek.getText()),Integer.parseInt(displaymonth.getText()),Integer.parseInt(displayday.getText()),Integer.parseInt(displayyear.getText()),displaythuchi.getText(),displaytype.getText(),Integer.parseInt(displaymoney.getText())));
+                            totalthudisplaymaster.setText(Integer.toString(sumthu));
+                        } else {
+                            JOptionPane.showMessageDialog(null,"Phần Loại chỉ được nhập 'thu' hoặc 'chi'");
                         }
-                        sumthu -= Integer.parseInt(displaymoney.getText());
-                    }    
-                    model.addRow(new Object[]{displayweek.getText(),displaymonth.getText(),displayday.getText(),displayyear.getText(),displaythuchi.getText(),displaytype.getText(),displaymoney.getText()});
-                    tablethuchi.add(new BangThuChi(Integer.parseInt(displayweek.getText()),Integer.parseInt(displaymonth.getText()),Integer.parseInt(displayday.getText()),Integer.parseInt(displayyear.getText()),displaythuchi.getText(),displaytype.getText(),Integer.parseInt(displaymoney.getText())));
-                    totalthudisplaymaster.setText(Integer.toString(sumthu));
+                    } else {
+                        JOptionPane.showMessageDialog(null,"Phần Tháng phải >= 1 và <= 12");
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null,"Phần Loại chỉ được nhập 'thu' hoặc 'chi'");
+                    JOptionPane.showMessageDialog(null,"Phần Ngày phải >= 1 và <= 31");
                 }
             }
         } catch (NumberFormatException e){
@@ -491,32 +499,40 @@ public class TableView extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
             if (i >= 0){
                 if (Integer.parseInt(displayweek.getText()) != NaN && Integer.parseInt(displaymonth.getText()) != NaN && Integer.parseInt(displayday.getText()) != NaN && Integer.parseInt(displayyear.getText()) != NaN && Integer.parseInt(displaymoney.getText()) != NaN){
-                    if (displaytype.getText().trim().equals("thu") || displaytype.getText().trim().equals("chi")){
-                        if (jTable1.getValueAt(i,5).toString().trim().equals("thu")){
-                            if (sumthu - Integer.parseInt(model.getValueAt(i,6).toString()) + Integer.parseInt(displaymoney.getText()) < 0){
-                                JOptionPane.showMessageDialog(null,"Số tiền phần 'chi' đang quá so với thu");
+                    if(Integer.parseInt(displayday.getText()) > 0 && Integer.parseInt(displayday.getText()) < 32){ 
+                        if(Integer.parseInt(displaymonth.getText()) > 0 && Integer.parseInt(displaymonth.getText()) < 13){
+                            if (displaytype.getText().trim().equals("thu") || displaytype.getText().trim().equals("chi")){
+                                if (jTable1.getValueAt(i,5).toString().trim().equals("thu")){
+                                    if (sumthu - Integer.parseInt(model.getValueAt(i,6).toString()) + Integer.parseInt(displaymoney.getText()) < 0){
+                                        JOptionPane.showMessageDialog(null,"Số tiền phần 'chi' đang quá so với thu");
+                                    }
+                                    sumthu -= Integer.parseInt(model.getValueAt(i,6).toString());
+                                } else {
+                                    sumthu += Integer.parseInt(model.getValueAt(i,6).toString());
+                                }
+                                model.setValueAt(displayweek.getText(),i,0);
+                                model.setValueAt(displaymonth.getText(),i,1);
+                                model.setValueAt(displayday.getText(),i,2);
+                                model.setValueAt(displayyear.getText(),i,3);
+                                model.setValueAt(displaythuchi.getText(),i,4);
+                                model.setValueAt(displaytype.getText(),i,5);
+                                model.setValueAt(displaymoney.getText(),i,6);
+                                if (jTable1.getValueAt(i,5).toString().trim().equals("thu")){
+                                    sumthu += Integer.parseInt(model.getValueAt(i,6).toString());
+                                } else {
+                                    sumthu -= Integer.parseInt(model.getValueAt(i,6).toString());
+                                }
+                                tablethuchi.set(i,new BangThuChi(Integer.parseInt(displayweek.getText()),Integer.parseInt(displaymonth.getText()),Integer.parseInt(displayday.getText()),Integer.parseInt(displayyear.getText()),displaythuchi.getText(),displaytype.getText(),Integer.parseInt(displaymoney.getText())));
+
+                                totalthudisplaymaster.setText(Integer.toString(sumthu));
+                            } else {
+                                JOptionPane.showMessageDialog(null,"Phần Loại chỉ được nhập 'thu' hoặc 'chi'");
                             }
-                            sumthu -= Integer.parseInt(model.getValueAt(i,6).toString());
                         } else {
-                            sumthu += Integer.parseInt(model.getValueAt(i,6).toString());
+                            JOptionPane.showMessageDialog(null,"Phần Tháng phải >= 1 và <= 12");
                         }
-                        model.setValueAt(displayweek.getText(),i,0);
-                        model.setValueAt(displaymonth.getText(),i,1);
-                        model.setValueAt(displayday.getText(),i,2);
-                        model.setValueAt(displayyear.getText(),i,3);
-                        model.setValueAt(displaythuchi.getText(),i,4);
-                        model.setValueAt(displaytype.getText(),i,5);
-                        model.setValueAt(displaymoney.getText(),i,6);
-                        if (jTable1.getValueAt(i,5).toString().trim().equals("thu")){
-                            sumthu += Integer.parseInt(model.getValueAt(i,6).toString());
-                        } else {
-                            sumthu -= Integer.parseInt(model.getValueAt(i,6).toString());
-                        }
-                        tablethuchi.set(i,new BangThuChi(Integer.parseInt(displayweek.getText()),Integer.parseInt(displaymonth.getText()),Integer.parseInt(displayday.getText()),Integer.parseInt(displayyear.getText()),displaythuchi.getText(),displaytype.getText(),Integer.parseInt(displaymoney.getText())));
-                        
-                        totalthudisplaymaster.setText(Integer.toString(sumthu));
                     } else {
-                        JOptionPane.showMessageDialog(null,"Phần Loại chỉ được nhập 'thu' hoặc 'chi'");
+                        JOptionPane.showMessageDialog(null,"Phần Ngày phải >= 1 và <= 31");
                     }
                 }
             } else {
