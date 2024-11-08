@@ -15,7 +15,7 @@ Dự án "Quản Lý Thu Chi Cá Nhân" là một ứng dụng Java sử dụng 
   - Người dùng cần đăng nhập với tài khoản hợp lệ để truy cập vào các chức năng của ứng dụng.
   
 - **Quản Lý Thu Chi**: 
-  - Nhập và lưu trữ thông tin căn hộ bao gồm:
+  - Nhập và lưu trữ thông tin thu chi:
     - Tuần
     - Tháng
     - Ngày
